@@ -102,6 +102,36 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+
+  // *********************************
+  // * Additional fields and methods *
+  // *********************************
+
+  VectorXd fallback_x_;
+
+  MatrixXd fallback_P_;
+
+  /**
+   * Generates (augmented) sigma points
+   * @return X_sig
+   */
+  MatrixXd GenerateAugmentedSigmaPoints();
+
+  /**
+   * Predicts sigma points
+   * @param Xsig_aug
+   * @param delta_t
+   * @return MatrixXd
+   */
+  MatrixXd PredictSigmaPoints(const MatrixXd &Xsig_aug, const double delta_t);
+
+  /**
+   * Normalizes angle to between -pi and pi
+   * @param angle
+   * @return normalized angle
+   */
+  double NormalizeAngle(double angle);
 };
 
 #endif /* UKF_H */
